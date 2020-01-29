@@ -1,0 +1,228 @@
+<meta charset = "UTF-8">
+
+<script>
+	document.write("aloy <br> aloy2");
+	document.write("<br>");
+	document.write("18" + "20");
+	document.write("<br>");
+	document.write(18 + 20);
+	document.write("<br>");
+	document.write("18" + 20);
+	document.write("<br>");
+	document.write(18 + "20");
+	document.write("<br>");
+	document.write("soma errada " + 20 + 10);
+	document.write("<br>");
+	document.write("soma certa " + (20 + 10));
+	document.write("<hr>");
+
+	//-------------------------------------------//
+
+	var ano = 2020;
+	document.write("ano passado: " + (ano - 1));
+	document.write("<br>");
+	document.write("ano que vem: " + (ano + 1));
+	document.write("<hr>");
+
+	//-------------------------------------------//
+
+	function pulaLinha(nLinhas)
+	{
+		for (var i = 1; i <= nLinhas; i++)
+		{
+			document.write("<br>");
+		}
+	}
+
+	function escreveMsg(mensagem)
+	{
+		document.write("<big>" + mensagem + "</big>");
+		pulaLinha(1);
+	}
+
+	function desenhaLinha()
+	{
+		document.write("<hr>");
+	}
+
+	pulaLinha(1);
+	escreveMsg("ano passado: " + (ano - 1));
+	escreveMsg("ano que vem: " + (ano + 1));
+	pulaLinha(1);
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	function calculaIMC(peso, altura)
+	{
+		var imc = Math.round(peso/(altura*altura));
+		return imc;
+	}
+
+	var imcYo = calculaIMC(76, 1.65);
+	escreveMsg("IMC: " + imcYo);
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	var altura = 1.65; //prompt("informe altura: ");
+	var peso = 76; //prompt("informe peso: ");
+	escreveMsg("Vosso IMC: " + calculaIMC(peso, altura));
+	// Só funcionou porque não foi usado o operador +
+	desenhaLinha();
+
+	//-------------------------------------------//
+	
+	var vitorias = 3; //parseInt(prompt("n vitorias: "));
+	var empates = 1; //parseInt(prompt("n empates: "));
+	escreveMsg("Pontos: " + (vitorias*3+empates) );
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	vitorias = 9
+	empates = 1;
+	var pontosEsseAno = (vitorias*3+empates);
+	escreveMsg("Pontos esse ano: " + pontosEsseAno );
+
+	var pontosAnoPassado = 28;
+	escreveMsg("Pontos ano passado: " + pontosAnoPassado );
+
+	if (pontosEsseAno > pontosAnoPassado) 
+	{
+		escreveMsg("Seu time está melhor que ano passado");
+	}
+	else if (pontosEsseAno < pontosAnoPassado) 
+	{
+		escreveMsg("Seu time está pior que ano passado");
+	}
+	else if (pontosEsseAno == pontosAnoPassado) 
+	{
+		escreveMsg("Seu time está igual ao ano passado");
+	}
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	function dizSituacaoIMC(peso, altura)
+	{
+		var imc = calculaIMC(peso, altura);
+		var situacaoIMC = "não sei";
+		if (imc >= 35 || imc <= 18) 
+		{
+			situacaoIMC = "ruim";
+		}
+		else
+		{
+			situacaoIMC = "bão";
+		}
+		return situacaoIMC;
+	}
+
+	var altura = 1.65; //parseInt(prompt("informe altura: "));
+	var peso = 76; //parseInt(prompt("informe peso: "));
+	escreveMsg("Vosso IMC de " + calculaIMC(peso, altura) + " está " + dizSituacaoIMC(peso, altura));
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	escreveMsg(Math.round(Math.random()*10));
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	var primeiroAnoCopa = 1930;
+	var anoCopa = primeiroAnoCopa;
+	var anoTarget = 1941;
+
+	escreveMsg("Até o ano de " + anoTarget + " teve Copa nos anos: ");
+	while(anoCopa <= anoTarget)
+	{
+		escreveMsg(anoCopa);
+		anoCopa = anoCopa + 4;
+	}
+	desenhaLinha();
+
+	//-------------------------------------------//
+
+	var numero = parseFloat("12.13");
+	escreveMsg(numero);
+	desenhaLinha();
+</script>
+
+<input/>
+<button>Compare com o meu segredo</button>
+
+<script>
+    function sorteia() 
+    {
+    	return Math.round(Math.random() * 10);
+    }
+
+    function sorteiaNumeros(quantidade) 
+    {
+        var segredos = [];
+        var numero = 1;
+
+        while(numero <= quantidade) 
+        {
+        	var numeroAleatorio = sorteia();
+			var achou = false;
+
+            if (numeroAleatorio != 0) 
+            {
+                var posicao = 0
+                while(posicao < segredos.length)
+                {
+                	if(segredos[posicao] == numeroAleatorio)
+					{
+                    	achou = true;
+                        posicao = segredos.length;
+                    }
+                    else
+                    {
+                    	posicao++
+                    }
+                }
+
+                if (achou == false)
+                {
+					segredos.push(numeroAleatorio);
+					numero++;
+                }
+          	}	
+        }
+        return segredos;
+    }
+
+    function verifica() 
+    {
+    	var achou = false;
+		for(var posicao = 0; posicao < segredos.length; posicao++)
+		{
+			if(input.value == segredos[posicao]) 
+			{
+				alert("Você ACERTOU!");
+				achou = true;
+				break;
+            } 
+        }
+
+		if(achou == false)
+		{
+			alert("Você ERROU!");
+		}
+
+		input.value = "";
+		input.focus();
+    }
+
+    var segredos = sorteiaNumeros(3);
+	pulaLinha(1);
+	escreveMsg(segredos);
+	var input = document.querySelector("input");
+	var button = document.querySelector("button");
+
+	input.focus();
+	button.onclick = verifica;
+</script>
