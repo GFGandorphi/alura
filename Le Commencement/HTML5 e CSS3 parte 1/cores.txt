@@ -1,0 +1,23 @@
+Hexadecimal
+	0123456789ABCDEF
+
+	RGB = Red Green Blue
+
+	# _ _ _ _ _ _
+
+	0 = Ausência
+	F = Máximo
+
+	Preto:		#000000
+	Branco:		#FFFFFF
+	Vermelho:	#FF0000
+
+RGB no css:
+	rgb(_, _, _)
+
+	0 	= Ausência
+	255 = Máximo
+
+	Preto:		rgb(0, 0, 0)
+	Branco:		rgb(255, 255, 255)
+	Vermelho:	rgb(255, 0, 0)
