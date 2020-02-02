@@ -1,0 +1,6 @@
+https://dzone.com/articles/top-20-git-commands-with-examples
+https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
+https://git-scm.com/docs
+
+echo "line" > filename.txt
+mv oldnametxt newname.txt
