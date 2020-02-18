@@ -1,0 +1,192 @@
+João Fulano,123.456.789-00,21 de Maio de 1993,(21) 3079-9987,Rua do Ouvidor,50,20040-030,Rio de Janeiro
+Maria Fulana, 98765432100,11 de Abril de 1995,(11) 933339871,Rua Vergueiro,3185,04101-300,São Paulo
+denise teste, 987.654.321.00,28 de Dezembro de 1991,(31)45562712,SCS Qd. 8 Bl. B-50,11,70333-900,Rio Grande
+
+O que é uma Expressão Regular?
+Uma expressão regular, ou Regex, são padrões utilizados para identificar determinadas combinações ou cadeias de caracteres em uma string. Ela faz parte do dia a dia de todos os programadores e administradores de infra. Por meio dela, podemos validar a entrada de usuários ou encontrar alguma informação em logs, documentação ou saída de comando. O mais legal é que as Regex são escritas independentes de uma linguagem, como JavaScript ou C#. As expressões são definidas em sua própria linguagem formal e uma vez aprendida, podemos aplicar o conhecimento dentro da linguagem de nossa preferência. Em outras palavras, linguagens como Java, JavaScript, C# e várias outras possuem uma implementação das expressões regulares e sabem interpretá-la.
+
+Regex, ou expressões regulares, é uma linguagem para encontrar padrões de texto.
+Sendo uma linguagem independente, existem interpretadores para a maioria das plataformas de desenvolvimento, como JavaScript, C#, Python ou Ruby.
+Uma classe de caracteres predefinida é \d, que significa qualquer dígito.
+Existem vários meta-char, como . ou *.
+Existem quantifiers que definem quantas vezes um caractere deve aparecer:
+	{1} é um quantifier que significa uma vez.
+	* é um quantifier que significa zero, uma ou mais vezes
+. é um meta-char que significa qualquer char.
+Com \ podemos escapar meta-chars, por exemplo \.
+
+Na aula anterior já vimos uma classe predefinida, o \d. Essa classe na verdade é apenas um atalho pra [0-9], ou seja qualquer dígito. Os colchetes definem uma classe de caracteres e nada impede que criemos nossa própria classe.
+Repare que na décima segunda posição do CPF pode vir um ponto OU hífen, que podemos declarar com a classe: [.-]. Perceba também que não escapamos o ponto (.), pois dentro dos colchetes o ponto já possui o seu valor literal. Importante também é que a ordem não importa, [.-] e [-.] são a mesma coisa.
+Caracteres opcionais:
+A quantidade de vezes que essa classe de caracteres deve aparecer é definida por um quantifier, por exemplo, como já vimos:
+	[.-]* - ponto ou hífen zero, uma ou mais vezes.
+	[.-]{1} - ponto ou hífen uma vez.
+No nosso caso [.-] é opcional, pode ter ou não ter, mas uma vez apenas. Dentro da regex, isso é declarado através do meta-char ponto de interrogação (?). O ponto de interrogação (?), que significa zero ou uma vez, é mais um quantifier.
+Assim podemos combinar a classe [.-] com o quantifier ?:
+	[.-]?- ponto ou hífen zero ou uma vez.
+
+Trabalhando com espaços
+\s é um whitespace. Normalmente é um atalho para [ \t\r\n\f].
+	\t é um tab.
+	\r é carriage return.
+	\n é newline.
+	\f é form feed.
+
+Trabalhando com quantidades
+? - zero ou uma vez.
+* - zero ou mais vezes.
++ - uma ou mais vezes.
+{n} - exatamente n vezes.
+{n,} - no mínimo n vezes.
+{n,m} - no mínimo n vezes, no máximo m vezes.
+
+Classes de letras
+[A-Z] significa de A até Z, sempre maiúscula.
+[a-z] significa de a até z, sempre minúscula,
+[A-Za-z] significa A-Z ou a-z.
+[abc] significa a, b ou c.
+
+\w (word char) e é um atalho para [A-Za-z0-9_]
+
+[0123]?\d\s+de\s+[A-Z][a-zç]{1,8}\s+de\s+[12]\d{3}
+Essa é a busca feita para uma data: XX de XXXXXXXX de XXXX
+Explicando cada trecho:
+[0123]? 			: um dígito opcional no valor de 0, 1, 2 OU 3
+\d 					: um dígito numérico de 0 a 9
+\s+					: whitespace uma ou mais vezes
+de 					: string "de"
+[A-Z][a-zç]{1,8} 	: ima letra de A a Z maiúscula seguida de uma a oito letras de A a Z, ou ç, minúsculas
+[12]				: ou dígito 1 ou dígito 2
+\d{3}				: três dígitos numéricos (de 0 a 9) em sequência
+
+A grande maioria de meta-chars são valores literais na definição da classe (dentro de []). Por exemplo, a classe abaixo define apenas valores literais:
+[.?+*{}]
+Apenas os caracteres \ (barra invertida), - (hífen) e ^ (circunflexo) realmente são meta-chars dentro de uma classe. O hífen e a barra invertida já vimos na aula, por exemplo na classe:
+[a-z\d]
+Definimos uma classe com letras minúsculas e dígitos.
+O circunflexo (^) significa negação dentro dos colchetes
+
+Word boundary
+O que queremos na verdade é encontrar o início e o fim de uma palavra, que podemos definir pela regex \b. \b é uma das âncoras, chamada de word boundary. Uma âncora não seleciona um caractere, ela seleciona apenas uma posição no texto alvo. Ou seja, a âncora \b sozinha devolve nada (zero-length).
+	\b antes : ignora resultados com word char (\w) antes da string
+	\b depois : ignora resultados com word char (\w) depois da string
+	\w : [A-Za-z0-9_]
+Exemplo
+quero encontrar : aaa
+frase da busca: aaa0 _aaa Zaaa aaa 1aaa aaa3 -aaa
+	com \baaa : encontro aaa0, aaa, aaa3, -aaa
+	com aaa\b : encontro _aaa, Zaaa, aaa, 1aaa, -aaa
+	com \baaa\b : encontro aaa, -aaa
+Queremos avaliar a linha inteira.
+Para garantir que nada vem antes : âncora ^
+Âncora para avaliar o fim da string: $
+	^ é uma âncora que seleciona o início da string alvo.
+	$ é uma âncora que seleciona o fim do alvo.
+
+Existe a inversão do \b, o non-word-boundary: \B (B maiúsculo).
+A nossa regex seleciona uma sílaba e antes e depois dela deve ter um Non word boundary. Em outras palavras, a sílaba deve aparecer dentro de uma palavra, nunca no inicio ou fim.
+
+Um grupo é definido através de parênteses ().
+relembrando a regex que extrai a data
+[0123]?\d\s+de\s+[A-Z][a-zç]{1,8}\s+de\s+[12]\d{3}
+[0123]?\d\s+de\s+[A-Z][a-zç]{1,8}\s+de\s+([12]\d{3})
+ano será identificado como um grupo
+Dentro do código JavaScript, o método exec devolve um array, com o match inteiro e os grupos da regex.
+podemos definir mais grupos para também selecionar o dia e o mês:
+([0123]?\d)\s+de\s+([A-Z][a-zç]{1,8})\s+de\s+([12]\d{3})
+A regex com o alvo 21 de Maio de 1993 devolve, além do match inteiro, os grupos 21, Maio e 1993.
+podemos deixar a preposição de como opcional: (de\s+)?, e aplicando isso na regex nas duas preposições:
+([0123]?\d)\s+(de\s+)?([A-Z][a-zç]{1,8})\s+(de\s+)?([12]\d{3})
+Essa regex pega datas como: 21 Maio 1993, 21 Maio de 1993 e 21 de Maio de 1993
+
+Agora, a pergunta é: como podemos usar um grupo que não é devolvido pela regex? Para tal existem os non-capturing groups!
+Novamente usaremos o simbolo ?, mas agora no início do grupo junto com os dois pontos, por exemplo para a preposição de: (?:de\s+)?
+([0123]?\d)\s+(?:de\s+)?([A-Z][a-zç]{1,8})\s+(?:de\s+)?([12]\d{3})
+Isso devolve os grupos:
+21 de Maio de 1993 ||| 21 ||| Maio ||| 1993
+
+<h1 class="text-left">Expressões regulares</h1>
+<h1.+>  :  Tudo é selecionado
+O meta-char, que na verdade é ganancioso, é o +, igualmente * e {} são também assim, e sempre selecionam o máximo de caracteres possíveis, se não for configurado diferente.
+podemos dizer que não queremos "ganância" e sim preguiçoso ou hesitante. Isso se faz, novamente pelo caractere ?
+<h1.+?>  :  Apenas selecionado <h1 class="text-left">
+
+gananciosa : <h1.{1,10} : seleciona 10 caracteres depois do <h1
+preguiçoso : <h1.{1,10}? : seleciona apenas 1 caractere depois do <h1
+
+backreference
+<(h1|h2).+?>([\w\sõãí.]+)<\/\1>
+\1 referencia (h1|h2) : busca correspondência (h1 com h1 ou h2 com h2)
+
+var target = "11a22b33c";
+var exp = new RegExp('(\\d\\d)(\\w)', 'g');
+	ou
+var exp = /(\d\d)(\w)/g;
+exp.test(target);
+	retorna : true
+exp.exec(target);
+	retorna : ["11a", "11", "a"]
+exp.exec(target);
+	retorna : ["22b", "22", "b"]
+exp.exec(target);
+	retorna : ["33c", "33", "c"]
+exp.exec(target);
+	retorna : null
+
+Temos a seguinte string em JavaScript:
+var anoMesDia = '2007-12-31';
+Nossa missão é trocar todos os hífens por uma /. String's em JavaScript são objetos e possuem métodos especiais que aceitam expressões regulares, como é o caso do método replace. Primeiro, vamos criar a expressão que encontra todos os hífens de uma string, inclusive vamos usar a forma literal de declaração:
+var exp = /-/g
+Agora, podemos passar para o método replace da nossa string nossa expressão. O método replace recebe uma expressão regular como primeiro parâmetro e o segundo o novo texto que deve substituir todos os lugares que condizerem com a expressão passada. Sendo assim, temos:
+anoMesDia = anoMesDia.replace(exp, '/');
+Se imprimirmos o valor de anoMesDia no console do browser, temos como resultado:
+'2007/12/31';
+Perfeito! Mas cuidado, se você tivesse omitido o g da expressão, ele trocaria apenas o primeiro hífen.
+
+
+Recebemos de um cliente um arquivo que, segundo ele, era para ser um CSV (valores separados por vírgula). Contudo, como nada é perfeito, logo na primeira linha há evidência que foram utilizados vírgula, hífen e ponto e vírgula. Com certeza, nada foi padronizado!
+Declare a seguinte string que nos dá um exemplo da situação atual:
+var arquivo = '100,200-150,200;20';
+Precisamos em JavaScript extrair todos os valores dessa string para no final somá-los. Para tarefas como essa, há o método split que todo objeto String possui. Nela, podemos passar um separador que ele se encarregará de criar um array com cada item considerando o separador utilizado. Contudo, temos um problema com essa estrutura precária. Vejamos o resultado do split:
+var valores = arquivo.split(',');
+Quando imprimimos os valores no console temos:
+["100", "200-150", "200;20"]
+Com certeza não é isso que queremos, queremos cada valor em uma posição do array. E agora? A boa notícia é que a função split aceita receber como critério uma expressão regular. Vamos criar uma que consiga o que desejamos:
+var exp = /[,;-]/;
+Agora, vamos passar nossa expressão para split:
+var exp = /[,;-]/;
+var valores = arquivo.split(exp);
+Quando imprimimos no console os valores temos:
+["100", "200", "150", "200", "20"]
+Excelente. Agora o desenvolvedor pode iterar pela lista, convertendo os valores de string para number e totalizar.
+
+
+Vejamos a seguinte string:
+var codigos = 'A121B12112C12212F12G01';
+A variável codigos guarda uma string com vários códigos concatenados. A lei de formação é a seguinte: todo código começa com uma letra seguida de 1 ou mais dígitos. Precisamos extrair essas string num array, ou seja, uma lista de código para que o desenvolvedor possa verificar se cada um desses códigos existe no sistema.
+Uma expressão regular que podemos usar para selecionar quem é código é a seguinte:
+var exp = /[A-Za-z]\d+/g
+E agora? Como extrair para um array quem segue esse padrão? Toda string em JavaScript possui o método match. Ele aceita uma expressão regular e retorna em um array todas as partes do alvo que atendem a expressão regular. Usando match:
+var codigosExtraidos = codigos.match(exp);
+Imprimindo codigosExtraidos temos:
+["A121", "B12112", "C12212", "F12", "G01"]
+
+
+O HTML5 introduziu para as tags input o atributo pattern. Ele recebe como atributo expressões regulares, inclusive, quando o formulário for submetido e o valor digitado pelo usuário não for compatível com a expressão, o próprio navegador exibirá automaticamente uma mensagem para o usuário indicando que o campo é inválido. Mas é importante que o input faça parte de um formulário, caso contrário a validação não será aplicada.
+Vamos fazer com que nosso input aceite apenas números:
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>Testando pattern</title>
+</head>
+<body>
+    <form>
+        <input pattern="[0-9]*">
+        <input type="submit" value="Enviar dados">
+    </form>
+</body>
+Veja que seu conhecimento em expressão regular também pode ser usado para validar formulários!
+
+Existem uma serie de ferramentas sofisticadas na web que você pode utilizar para escrever e analisar a sua regex. Essas ferramentas vão além do nosso "testador" e dão mais dicas sobre a regex criadas.
+https://regexr.com/
+https://regex101.com/
