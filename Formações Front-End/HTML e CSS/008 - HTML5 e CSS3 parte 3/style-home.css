@@ -1,0 +1,67 @@
+body
+{
+	margin: 0px;
+}
+
+p
+{
+	text-align: center;
+	font-size: 16px;
+}
+
+em strong
+{
+	color: red;
+}
+
+#banner
+{
+	width: 100%;
+	margin-left: 0px;
+} 
+
+.principal
+{
+	background: #CCCCCC;
+	padding: 30px;
+}
+
+.titCent
+{
+	text-align: center;
+}
+
+.titPrin
+{
+	padding-left: 20px;
+}
+
+#missao
+{
+	font-size: 20px;
+}
+
+.itens
+{
+	font-style: italic;
+}
+
+.beneficios
+{
+	background: #FFFFFF;
+	padding: 20px;
+}
+
+ul
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 20%;
+	margin-right: 15%;
+
+}
+
+.imgBeneficios
+{
+	width: 50%;
+}
