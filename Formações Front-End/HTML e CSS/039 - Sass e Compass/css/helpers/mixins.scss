@@ -1,0 +1,39 @@
+// Mixins usados no meu Sass
+@mixin borda-arredondada($raio:0.3em)
+{
+  -webkit-border-radius: $raio;
+  border-radius: $raio;
+}
+
+// Placeholders usados no Sass
+// placeholders não passam valores diferentes dos definidos
+// porém são muito mais eficientes
+%image-replacement
+{
+  text-indent: -9999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+%posicao-inicial-div
+{
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+%sombra-padrao
+{
+  -webkit-box-shadow: 0 2px 6.65px 0.35px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6.65px 0.35px rgba(0, 0, 0, 0.3);
+}
+
+@function multiplica-pela-fonte($multiplicador)
+{
+  @return round($multiplicador * $tamanho-fonte-padrao);
+}
+
+//Quando o mixin é usado em várias regras CSS, o código é repetido em todas elas.
+//O placeholder agrupa eles e evita o código repetido, porém o placeholder apenas é uma alternativa para o mixin quando lidamos com parâmetros fixos. Quando é preciso passar algum valor na chamada da função, o mixin é mais recomendado.
