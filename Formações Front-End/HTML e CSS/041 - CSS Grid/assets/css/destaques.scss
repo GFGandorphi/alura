@@ -1,0 +1,98 @@
+.destaques { 
+    display: grid;
+    grid-gap: .2rem;
+    grid-template-columns: 25% 25% 25% auto;
+    grid-template-rows: 33.33% 33.33% auto;
+    height: calc(100vh - #{$altura-cabecalho});
+}
+
+.caixa {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.destaques__titulo {
+    background: rgba(0, 0, 0, .5);
+    color: #fdfdfd;
+    padding: .6rem;
+    text-align: center;
+    width: 100%;
+}
+
+.destaques__principal {
+	background-image: url('../img/fortnite.jpg');
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	/*grid-column-start: 1;
+    grid-column-end: 4;*/
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.destaques__secundario:nth-child(2) {
+    /* maneira curta */
+    background: url('../img/pubg.jpg') center / cover no-repeat;
+    /*grid-column: 4 / 4;
+    grid-row: 1 / 1;*/
+}
+/*
+A pseudo-classe CSS :nth-child()
+seleciona elementos com base em 
+suas posições em um grupo de 
+elementos irmãos.
+
+The :nth-child(n) selector matches 
+every element that is the nth child, 
+regardless of type, of its parent.
+	n can be a number, a keyword, or a formula.
+	Tip: Look at the :nth-of-type() selector to 
+	select the element that is the nth child, of 
+	a particular type, of its parent.
+*/
+
+.destaques__secundario:nth-child(3) {
+    background: url('../img/slack.png') center / cover no-repeat;
+    /*grid-column: 4 / 4;
+    grid-row: 2 / 2;*/
+
+}
+
+.destaques__secundario:nth-child(4) {
+    background: url('../img/whatsapp.png') center / cover no-repeat;
+    /*grid-column: 4 / 4;
+    grid-row: 3 / 3;*/
+}
+
+.destaques__secundario:nth-child(5) {
+    background: url('../img/cs-go.jpg') center / cover no-repeat;
+    /*-column: 3 / 3;
+    grid-row: 3 / 3;*/
+}
+
+.destaques__categorias {
+	/*grid-column: 1 / 3;*/
+    grid-row: 3 / 3;
+}
+
+.destaques__categorias___lista {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.destaques__categorias___item {
+	display: flex;
+	align-items: center;
+    background: #fdfdfd;
+    border-left: 5px solid transparent;
+    color: #333333;
+    padding: 1rem;
+    width: 50%;
+}
+
+.destaques__categorias___link {
+    color: inherit;
+}
