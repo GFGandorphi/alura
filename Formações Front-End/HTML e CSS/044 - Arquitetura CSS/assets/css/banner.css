@@ -1,0 +1,48 @@
+.banner {
+	position: relative;
+	/*establish nearest positioned 
+	ancestor for absolute positioning*/
+}
+
+.banner__img {
+	background-image: url(../img/banner.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+}
+
+.banner__titulo {
+	color: #fdfdfd;
+	font-family: Pacifico, cursive;
+    /* horizontal alignment */
+    left: 50%;
+	position: absolute;  
+	text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
+	text-align: center;
+    /* vertical alignment */
+    top: 50%;
+    /* precise centering*/
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+@media screen and (min-width: 0) {
+	.banner__titulo {
+		font-size: 3rem;
+	}
+
+	.banner__img {
+		height: 50vh;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.banner__titulo {
+		font-size: 4rem;
+	}
+
+	.banner__img {
+		height: 75vh;
+	}
+}
