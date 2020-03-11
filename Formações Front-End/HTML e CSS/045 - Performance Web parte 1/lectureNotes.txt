@@ -1,0 +1,38 @@
+Performance Web parte 1
+
+
+1- Minificação
+	Diminuir tamanho dos arquivos tirando espaços, tabs, comentários, etc...
+	exemplo: https://refresh-sf.com/
+
+
+2- Imagens (png, jpg, gif, etc..)
+	Em média imagens representam 2/3 do tamanho da página
+	
+	2.1- Primeira otimização: Já coloque no tamanho certo
+		Não tem pq a imagem ter 1000x1000 px se no site ocupará 50x50 px
+
+	2.2- Retirar informações da imagem irrelevantes para a web
+		Data, hora, etc...
+		"Lossless"	- Sem perda visual, somente das informações desnecessárias
+		"Lossy"		- Possui perda visual, mas procura um balanço entre perda e tamanho. Diminui mais que Lossless.
+
+	2.3- Criar sprites
+		uma imagem com todas
+
+	SVG é vetorial e escala bem em todo tipo de tamanho e resolução.
+		É ótimo pra gráficos vetoriais.
+		Se a imagem for muito complexa, pode ser um gargalo; mas é bom medir direito.
+		Pode ser otimizado (possui meta dados como as imagens).
+
+	exemplos:
+		https://kraken.io/web-interface
+		https://jakearchibald.github.io/svgomg/
+		https://tinypng.com/
+		https://www.jpegmini.com/
+
+3- Servidor
+	versão de testes aula 3.6 http://wpt-dot-curso-alura-site.appspot.com
+	testar pagina
+		http://www.webpagetest.org/
+		https://developers.google.com/speed/pagespeed/insights/?hl=pt-BR
